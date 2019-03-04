@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+// Complete the getWays function below.
+long getWays(long n, vector<long> c) {
+    long combinations[n + 1] = {0};
+    combinations[0] = 1;
+    for(int i=0 ; i < c.size() ; i++){
+        for(int j=1 ; j <= n ; j++){
+            if(c[i] <= j){
+                combinations[j] += combinations[j-c[i]];
+            }
+        }
+    }
+    return combinations[n];
+}
+
+int main()
+{
+    long Value,n;
+    cin>>Value>>n;
+    vector<long> coin;
+    long x;
+    for(long i=0;i<n;i++){
+        cin>>x;
+        coin.push_back(x);
+    }
+    cout<<getWays(Value , coin);
+   return 0; 
+}
